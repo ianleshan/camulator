@@ -11,13 +11,26 @@ class CalculatorScreen extends StatefulWidget {
 class _CalculatorScreenState extends State<CalculatorScreen> {
   double displayNumberSize = 50.0;
   String displayText = "";
+  String cOrAC = "AC";
+  double lastAnswer;
 
   String getDisplayText() {
     return displayText;
   }
 
   String updateDisplayTextCallback(String buttonPressed) {
-    displayText += buttonPressed;
+    if (int.tryParse(buttonPressed) != null) {displayText += buttonPressed;}
+    else if (buttonPressed == "AC" || buttonPressed == "C") {displayText = ""; lastAnswer = null;}
+    else if (buttonPressed == "+") {
+      if (lastAnswer == null) {lastAnswer = double.tryParse(displayText);}
+      else {
+        lastAnswer = lastAnswer + double.tryParse(displayText);
+        displayText = lastAnswer.toString();
+      }
+    }
+    if (displayText == "") {cOrAC = "AC";}
+    else {cOrAC = "C";}
+
     // this.build(context);
     setState(() {
       
@@ -51,7 +64,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             child: Row(
               children: <Widget>[
                 NumberButton(
-                  text: "AC",
+                  text: cOrAC,
                   color: Colors.grey,
                   textColor: Colors.black,
                   fontSize: 40,
