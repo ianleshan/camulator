@@ -23,322 +23,69 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           Expanded(
             child: Row(
               children: <Widget>[
-                NumberButton("AC", Colors.grey, Colors.black),
-                NumberButton("+/-", Colors.grey, Colors.black),
-                NumberButton("%", Colors.grey, Colors.black),
-                NumberButton("÷", Colors.orange, Colors.white),
+                NumberButton(text: "AC", color: Colors.grey, textColor: Colors.black, fontSize: 40,),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "+/-", color: Colors.grey, textColor: Colors.black, fontSize: 38,),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "%", color: Colors.grey, textColor: Colors.black),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "÷", color: Colors.orange, textColor: Colors.white),
               ],
             ),
           ),
+          Padding(padding: EdgeInsets.all(4.0),),
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "7",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "8",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "9",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "✕",
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.orange,
-                    ),
-                  ),
-                ),
+                NumberButton(text: "7", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "8", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "9", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "✕", color: Colors.orange, textColor: Colors.white, fontSize: 26.0),
               ],
             ),
           ),
+          Padding(padding: EdgeInsets.all(4.0),),
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "4",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "5",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "6",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "-",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.orange,
-                    ),
-                  ),
-                ),
+                NumberButton(text: "4", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "5", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "6", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "-", color: Colors.orange, textColor: Colors.white, fontSize: 65.0,),
               ],
             ),
           ),
+          Padding(padding: EdgeInsets.all(4.0),),
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "1",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "2",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "3",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "+",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.orange,
-                    ),
-                  ),
-                ),
+                NumberButton(text: "1", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "2", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "3", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "+", color: Colors.orange, textColor: Colors.white),
               ],
             ),
           ),
+          Padding(padding: EdgeInsets.all(4.0),),
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "0",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "0",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        ".",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "=",
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.orange,
-                    ),
-                  ),
-                ),
+                NumberButton(text: "0", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "0", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: ".", color: Colors.grey.shade800, textColor: Colors.white),
+                Padding(padding: EdgeInsets.all(4.0),),
+                NumberButton(text: "=", color: Colors.orange, textColor: Colors.white),
               ],
             ),
           ),
@@ -352,8 +99,9 @@ class NumberButton extends StatelessWidget {
   String text;
   Color color;
   Color textColor;
+  double fontSize;
 
-  NumberButton(this.text, this.color, this.textColor);
+  NumberButton({this.text, this.color, this.textColor, this.fontSize = 45.0});
 
   @override
   Widget build(BuildContext context) {
@@ -363,7 +111,7 @@ class NumberButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 50.0,
+              fontSize: fontSize,
               fontWeight: FontWeight.w300,
               color: textColor,
             ),
