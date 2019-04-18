@@ -17,9 +17,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   String updateDisplayTextCallback(String buttonPressed) {
-    this.setState(() {
-      displayText = displayText + buttonPressed;
+    displayText += buttonPressed;
+    // this.build(context);
+    setState(() {
+      
     });
+    // print("Fdsaf" + displayText);
   }
 
   @override
@@ -34,7 +37,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               children: <Widget>[
                 Container(
                   color: Colors.black,
-                  child: Text(displayText, style: TextStyle(color: Colors.white, fontSize: displayNumberSize),)
+                  child: Align(alignment: Alignment.bottomLeft,
+                  child: Text(
+                    displayText, 
+                    style: TextStyle(
+                      color: Colors.white, fontSize: displayNumberSize),
+                    ), )
                 )
               ]
             ),
