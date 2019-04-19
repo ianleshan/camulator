@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 _CalculatorScreenState _globalState = new _CalculatorScreenState();
+
 class CalculatorScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -9,7 +10,7 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  double displayNumberSize = 50.0;
+  double displayNumberSize = 55.0;
   String displayText = "";
   String cOrAC = "AC";
   double lastAnswer;
@@ -33,19 +34,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     }
     buttonPressed == "=" ? lastOperation = null : lastOperation = buttonPressed;
     displayText = "";
-    setState(() {
-      
-    });
+    setState(() {});
     displayText = fixFloat(lastAnswer.toString());
   }
 
   String fixFloat(String float) {
     if (float.contains(".")) {
       while (float[float.length - 1] == "0") {
-        float = float.substring(0, float.length-2);
+        float = float.substring(0, float.length - 2);
       }
       if (float[float.length - 1] == ".") {
-        float = float.substring(0, float.length-2);
+        float = float.substring(0, float.length - 2);
       }
     }
     return float;
@@ -56,42 +55,45 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       if (textNeedsToBeRemoved) {
         displayText = buttonPressed;
         textNeedsToBeRemoved = !textNeedsToBeRemoved;
+      } else {
+        addPeriod
+            ? displayText += "." + buttonPressed
+            : displayText += buttonPressed;
       }
-      else {
-        addPeriod ? displayText += "." + buttonPressed : displayText += buttonPressed;
-        
-      }
-    }
-    else if (buttonPressed == "AC" || buttonPressed == "C") {
-      displayText = ""; 
-      lastAnswer = null; 
+    } else if (buttonPressed == "AC" || buttonPressed == "C") {
+      displayText = "";
+      lastAnswer = null;
       lastOperation = null;
-    }
-    else if (buttonPressed == "+" || buttonPressed == "-" || buttonPressed == "÷" || buttonPressed == "✕") {
+    } else if (buttonPressed == "+" ||
+        buttonPressed == "-" ||
+        buttonPressed == "÷" ||
+        buttonPressed == "✕") {
       if (lastAnswer == null) {
         lastAnswer = double.tryParse(displayText);
         lastOperation = buttonPressed;
         textNeedsToBeRemoved = true;
-      }
-      else {
+      } else {
         calculate(buttonPressed);
       }
     } else if (buttonPressed == "=") {
-      if (lastAnswer != null && buttonPressed != null && lastOperation != null) {
+      if (lastAnswer != null &&
+          buttonPressed != null &&
+          lastOperation != null) {
         calculate(buttonPressed);
       }
     }
-    if (displayText == "") {cOrAC = "AC";}
-    else {cOrAC = "C";}
+    if (displayText == "") {
+      cOrAC = "AC";
+    } else {
+      cOrAC = "C";
+    }
     addPeriod = false;
     if (buttonPressed == ".") {
       addPeriod = true;
     }
 
     // this.build(context);
-    setState(() {
-      
-    });
+    setState(() {});
     // print("Fdsaf" + displayText);
   }
 
@@ -99,191 +101,204 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Row(
-              children: <Widget>[
-                Container(
-                  color: Colors.black,
-                  child: Align(alignment: Alignment.bottomLeft,
-                  child: Text(
-                    displayText, 
-                    style: TextStyle(
-                      color: Colors.white, fontSize: displayNumberSize),
-                    ), )
-                )
-              ]
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                        color: Colors.black,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Text(
+                            displayText,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: displayNumberSize,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ))
+                  ]),
             ),
-          ),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                NumberButton(
-                  text: cOrAC,
-                  color: Colors.grey,
-                  textColor: Colors.black,
-                  fontSize: 40,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                  text: "+/-",
-                  color: Colors.grey,
-                  textColor: Colors.black,
-                  fontSize: 38,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "%", color: Colors.grey, textColor: Colors.black),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "÷", color: Colors.orange, textColor: Colors.white),
-              ],
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  NumberButton(
+                    text: cOrAC,
+                    color: Colors.grey,
+                    textColor: Colors.black,
+                    fontSize: 40,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                    text: "+/-",
+                    color: Colors.grey,
+                    textColor: Colors.black,
+                    fontSize: 38,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "%", color: Colors.grey, textColor: Colors.black),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "÷",
+                      color: Colors.orange.shade800,
+                      textColor: Colors.white),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(4.0),
-          ),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                NumberButton(
-                    text: "7",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "8",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "9",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "✕",
-                    color: Colors.orange,
+            Padding(
+              padding: EdgeInsets.all(4.0),
+            ),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  NumberButton(
+                      text: "7",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "8",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "9",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "✕",
+                      color: Colors.orange.shade800,
+                      textColor: Colors.white,
+                      fontSize: 26.0),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(4.0),
+            ),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  NumberButton(
+                      text: "4",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "5",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "6",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                    text: "-",
+                    color: Colors.orange.shade800,
                     textColor: Colors.white,
-                    fontSize: 26.0),
-              ],
+                    fontSize: 65.0,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(4.0),
-          ),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                NumberButton(
-                    text: "4",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "5",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "6",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                  text: "-",
-                  color: Colors.orange,
-                  textColor: Colors.white,
-                  fontSize: 65.0,
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.all(4.0),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(4.0),
-          ),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                NumberButton(
-                    text: "1",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "2",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "3",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "+", color: Colors.orange, textColor: Colors.white),
-              ],
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  NumberButton(
+                      text: "1",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "2",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "3",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "+",
+                      color: Colors.orange.shade800,
+                      textColor: Colors.white),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(4.0),
-          ),
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                NumberButton(
-                    text: "0",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "0",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: ".",
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                ),
-                NumberButton(
-                    text: "=", color: Colors.orange, textColor: Colors.white),
-              ],
+            Padding(
+              padding: EdgeInsets.all(4.0),
             ),
-          ),
-        ],
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  NumberButton(
+                      text: "0",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "0",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: ".",
+                      color: Colors.grey.shade800,
+                      textColor: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  NumberButton(
+                      text: "=",
+                      color: Colors.orange.shade800,
+                      textColor: Colors.white),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -303,26 +318,25 @@ class NumberButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: GestureDetector(
-          onTap: () {
-            _globalState.updateDisplayTextCallback(text);
-          },
-          child: Container(
-            child: Center(
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: fontSize * fontSizeScalar,
-                  fontWeight: FontWeight.w300,
-                  color: textColor,
-                ),
-              ),
-            ),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: color,
+      onTap: () {
+        _globalState.updateDisplayTextCallback(text);
+      },
+      child: Container(
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: fontSize * fontSizeScalar,
+              fontWeight: FontWeight.w300,
+              color: textColor,
             ),
           ),
-        )
-      );
+        ),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color,
+        ),
+      ),
+    ));
   }
 }
