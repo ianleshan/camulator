@@ -13,23 +13,80 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String displayText = "";
   String cOrAC = "AC";
   double lastAnswer;
+  String lastOperation;
+  bool textNeedsToBeRemoved = false;
+  bool addPeriod = false;
 
   String getDisplayText() {
     return displayText;
   }
 
+  calculate(String buttonPressed) {
+    if (lastOperation == "+") {
+      lastAnswer = lastAnswer + double.tryParse(displayText);
+    } else if (lastOperation == "-") {
+      lastAnswer = lastAnswer - double.tryParse(displayText);
+    } else if (lastOperation == "✕") {
+      lastAnswer = lastAnswer * double.tryParse(displayText);
+    } else if (lastOperation == "÷") {
+      lastAnswer = lastAnswer / double.tryParse(displayText);
+    }
+    buttonPressed == "=" ? lastOperation = null : lastOperation = buttonPressed;
+    displayText = "";
+    setState(() {
+      
+    });
+    displayText = fixFloat(lastAnswer.toString());
+  }
+
+  String fixFloat(String float) {
+    if (float.contains(".")) {
+      while (float[float.length - 1] == "0") {
+        float = float.substring(0, float.length-2);
+      }
+      if (float[float.length - 1] == ".") {
+        float = float.substring(0, float.length-2);
+      }
+    }
+    return float;
+  }
+
   String updateDisplayTextCallback(String buttonPressed) {
-    if (int.tryParse(buttonPressed) != null) {displayText += buttonPressed;}
-    else if (buttonPressed == "AC" || buttonPressed == "C") {displayText = ""; lastAnswer = null;}
-    else if (buttonPressed == "+") {
-      if (lastAnswer == null) {lastAnswer = double.tryParse(displayText);}
+    if (int.tryParse(buttonPressed) != null) {
+      if (textNeedsToBeRemoved) {
+        displayText = buttonPressed;
+        textNeedsToBeRemoved = !textNeedsToBeRemoved;
+      }
       else {
-        lastAnswer = lastAnswer + double.tryParse(displayText);
-        displayText = lastAnswer.toString();
+        addPeriod ? displayText += "." + buttonPressed : displayText += buttonPressed;
+        
+      }
+    }
+    else if (buttonPressed == "AC" || buttonPressed == "C") {
+      displayText = ""; 
+      lastAnswer = null; 
+      lastOperation = null;
+    }
+    else if (buttonPressed == "+" || buttonPressed == "-" || buttonPressed == "÷" || buttonPressed == "✕") {
+      if (lastAnswer == null) {
+        lastAnswer = double.tryParse(displayText);
+        lastOperation = buttonPressed;
+        textNeedsToBeRemoved = true;
+      }
+      else {
+        calculate(buttonPressed);
+      }
+    } else if (buttonPressed == "=") {
+      if (lastAnswer != null && buttonPressed != null && lastOperation != null) {
+        calculate(buttonPressed);
       }
     }
     if (displayText == "") {cOrAC = "AC";}
     else {cOrAC = "C";}
+    addPeriod = false;
+    if (buttonPressed == ".") {
+      addPeriod = true;
+    }
 
     // this.build(context);
     setState(() {
