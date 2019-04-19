@@ -41,10 +41,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String fixFloat(String float) {
     if (float.contains(".")) {
       while (float[float.length - 1] == "0") {
-        float = float.substring(0, float.length - 2);
+
+        float = float.substring(0, float.length-1);
       }
       if (float[float.length - 1] == ".") {
-        float = float.substring(0, float.length - 2);
+        float = float.substring(0, float.length-1);
       }
     }
     return float;
@@ -71,10 +72,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       if (lastAnswer == null) {
         lastAnswer = double.tryParse(displayText);
         lastOperation = buttonPressed;
-        textNeedsToBeRemoved = true;
-      } else {
+        print("oink");
+      }
+      else {
         calculate(buttonPressed);
       }
+      textNeedsToBeRemoved = true;
     } else if (buttonPressed == "=") {
       if (lastAnswer != null &&
           buttonPressed != null &&
