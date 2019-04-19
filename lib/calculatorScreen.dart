@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-_CalculatorScreenState _globalState = new _CalculatorScreenState();
+_CalculatorScreenState _globalState;
 
 class CalculatorScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
+    _globalState = new _CalculatorScreenState();
     return _globalState;
   }
 }
@@ -41,11 +42,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String fixFloat(String float) {
     if (float.contains(".")) {
       while (float[float.length - 1] == "0") {
-
-        float = float.substring(0, float.length-1);
+        float = float.substring(0, float.length - 1);
       }
       if (float[float.length - 1] == ".") {
-        float = float.substring(0, float.length-1);
+        float = float.substring(0, float.length - 1);
       }
     }
     return float;
@@ -73,8 +73,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         lastAnswer = double.tryParse(displayText);
         lastOperation = buttonPressed;
         print("oink");
-      }
-      else {
+      } else {
         calculate(buttonPressed);
       }
       textNeedsToBeRemoved = true;

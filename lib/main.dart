@@ -1,6 +1,7 @@
 import 'package:camulator/calculatorScreen.dart';
 import 'package:camulator/cameraScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,12 +32,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool switchScreen = true;
   CameraScreen camera;
+  CalculatorScreen calculator;
 
   @override
   void initState() {
     super.initState();
 
+    getScreenPrefs();
+
     camera = CameraScreen();
+    calculator = CalculatorScreen();
   }
 
   @override
@@ -45,17 +50,29 @@ class _MyHomePageState extends State<MyHomePage> {
       // appBar: AppBar(
       //   title: Text(widget.title),
       // ),
-      body: Center(
-        child: switchScreen ? camera : CalculatorScreen(),
+      body: Stack(
+        children: <Widget>[
+          camera,
+          switchScreen ? Container() : calculator,
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           setState(() {
             switchScreen = !switchScreen;
           });
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setBool('screen', switchScreen);
         },
         child: Icon(Icons.compare_arrows),
       ),
     );
+  }
+
+  void getScreenPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      switchScreen = (prefs.getBool('screen') ?? true);
+    });
   }
 }
