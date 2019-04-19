@@ -4,8 +4,12 @@ import 'package:camera/camera.dart';
 List<CameraDescription> cameras;
 
 class CameraScreen extends StatefulWidget {
+  _CameraScreenState state;
   @override
-  _CameraScreenState createState() => _CameraScreenState();
+  _CameraScreenState createState() {
+    state = _CameraScreenState();
+    return state;
+  }
 }
 
 class _CameraScreenState extends State<CameraScreen> {
